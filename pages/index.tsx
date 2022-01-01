@@ -1,27 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
+import useDetectTheme from '../components/useDetectTheme'
+import PlayerControls from '../components/PlayerControls'
+import ThemeSelector from '../components/ThemeSelector'
 
 const modes = {
-  woods: {
-    audio: 'birds',
-    video: 'blurry-trees.mov'
+  light: {
+    audio: 'witcher-theme',
+    video: 'Geralt-day.mp4'
   },
-  rain: {
-    audio: 'rain',
-    video: 'rain.mp4'
-  },
-  beach: {
-    audio: 'beach',
-    video: 'beach.mp4'
+  dark: {
+    audio: 'witcher-theme',
+    video: 'Geralt-night.mp4'
   }
 }
 
 const Home: NextPage = () => {
-  const [currentMode, setCurrentMode] = useState('beach')
+  const { theme, setTheme } = useDetectTheme()
   const [isPlaying, setIsPlaying] = useState(false)
 
-  const play = (playing) => {
+  const play = playing => {
     const player = document.querySelector('#audio-player')
     if (playing) {
       player.play()
@@ -30,59 +29,40 @@ const Home: NextPage = () => {
     }
   }
 
+  const handlePlayPause = bool => {
+    setIsPlaying(bool)
+    play(bool)
+  }
+
+  const handleThemeClick = () => {
+    if (theme === 'dark') {
+      setTheme('light')
+    } else {
+      setTheme('dark')
+    }
+  }
+
   return (
     <main>
       <div className="av">
-        <video src={`/video/${modes[currentMode].video}`} autoPlay loop playsInline muted></video>
+        <video
+          src={`/video/${modes[theme].video}`}
+          autoPlay
+          loop
+          playsInline
+          muted
+          poster="/video/poster.jpg"
+        />
+        <audio id="audio-player" loop>
+          <source src={`/sounds/${modes[theme].audio}.mp3`} type="audio/mpeg" />
+        </audio>
       </div>
       <div className="container">
-        <div className="grid-p-btn">
-          <button className="btn-flat">2 minutes</button>
-        </div>
-        <div className="grid-p-btn">
-          <button className="btn-flat">5 minutes</button>
-        </div>
-        <div className="grid-p-btn">
-          <button className="btn-flat">10 minutes</button>
-        </div>
-        <div className='player-clock'>
-          <audio id="audio-player" loop>
-            <source src={`/sounds/${modes[currentMode].audio}.mp3`}  type="audio/mpeg" />
-          </audio>
-          {!isPlaying ? (
-            <>
-              <img width={250} height={250} src="/svg/track-outline.svg" alt="play btn" />
-              <img
-                className="play-btn"
-                onClick={() => {
-                  setIsPlaying(true)
-                  play(true)
-                }}
-                width={100}
-                height={100}
-                src="/svg/play.svg"
-                alt="play btn"
-              />
-            </>
-          ) : (
-            <>
-              <img width={250} height={250} src="/svg/track-outline.svg" alt="play btn" />
-              <img
-                className="pause-btn"
-                onClick={() => {
-                  setIsPlaying(false)
-                  play(false)
-                }}
-                width={100}
-                height={100}
-                src="/svg/pause.svg"
-                alt="pause btn"
-              />
-            </>
-          )}
-          </div>
-          <div className="timer"><h3>10:00</h3></div>
-          
+        <PlayerControls
+          isPlaying={isPlaying}
+          handlePlayPause={handlePlayPause}
+        />
+        <ThemeSelector theme={theme} handleThemeClick={handleThemeClick} />
       </div>
     </main>
   )

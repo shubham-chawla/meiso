@@ -1,3 +1,33 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v118/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2)
+    format('woff2');
+}
+
+.icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 150px;
+  color: white;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+}
+
+.icon-small {
+  font-size: 48px;
+}
+
 html,
 body {
   padding: 0;
@@ -5,13 +35,15 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
- main {
+main {
   display: flex;
   height: 100vh;
   width: 100vw;
   align-items: center;
   justify-content: center;
- }
+  overflow: hidden;
+  position: relative;
+}
 
 a {
   color: inherit;
@@ -25,6 +57,7 @@ button {
 
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 video {
@@ -41,47 +74,19 @@ video {
 }
 
 .container {
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   height: 100%;
   width: 100%;
-  overflow-y: auto;
+  position: relative;
 }
 
-.btn-flat {
-  height: 50px;
-  width: 250px;
-  border: 1px solid white;
-  border-radius: 4px;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.btn-flat:hover {
-  font-weight: 600;
-  border: 2px solid white;
-}
-
-.grid-p-btn {
-  display: flex;
-  grid-column: 1 / 1;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-
-.player-clock {
-  grid-column: 2 / 2;
-  grid-row: 1 / 2;
+.player-controls {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transform: translateY(70%);
 }
 
 .play-btn {
@@ -109,23 +114,18 @@ video {
   align-self: flex-start;
 }
 
-h3 {
-  color: white;
-  font-size: 26px;
-  grid-column: 2 / 2;
-  grid-row: 3 / 3;
-  font-weight: 500;
+.fade {
+  opacity: 0.2;
 }
 
-.mode-btn {
+.fade:hover {
+  opacity: 1;
+}
+
+.theme-selector {
   display: flex;
-  grid-column: 3 / 3;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.mode-bg {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
 }
