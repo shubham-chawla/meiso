@@ -1,4 +1,10 @@
-const PlayerControls = ({ isPlaying, handlePlayPause }) => {
+const PlayerControls = ({
+  isPlaying,
+  handlePlayPause
+}: {
+  isPlaying: boolean
+  handlePlayPause: (arg1: boolean) => void
+}) => {
   return (
     <div className="player-controls">
       {!isPlaying ? (

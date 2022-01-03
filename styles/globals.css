@@ -89,31 +89,6 @@ video {
   position: relative;
 }
 
-.play-btn {
-  cursor: pointer;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-35%);
-}
-
-.pause-btn {
-  cursor: pointer;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.timer {
-  display: flex;
-  grid-column: 2 / 2;
-  grid-row: 3 / 3;
-  align-items: flex-start;
-  justify-content: center;
-  align-self: flex-start;
-}
-
 .fade {
   opacity: 0.2;
 }

@@ -5,7 +5,15 @@ import useDetectTheme from '../components/useDetectTheme'
 import PlayerControls from '../components/PlayerControls'
 import ThemeSelector from '../components/ThemeSelector'
 
-const modes = {
+interface modeType {
+  [index: string]: string
+}
+
+interface modesTypes {
+  [index: string]: modeType
+}
+
+const modes: modesTypes = {
   light: {
     audio: 'witcher-theme',
     video: 'Geralt-day.mp4'
@@ -20,8 +28,8 @@ const Home: NextPage = () => {
   const { theme, setTheme } = useDetectTheme()
   const [isPlaying, setIsPlaying] = useState(false)
 
-  const play = playing => {
-    const player = document.querySelector('#audio-player')
+  const play = (playing: boolean) => {
+    const player: any = document.querySelector('#audio-player')
     if (playing) {
       player.play()
     } else {
@@ -29,8 +37,8 @@ const Home: NextPage = () => {
     }
   }
 
-  const handlePlayPause = bool => {
-    setIsPlaying(bool)
+  const handlePlayPause = (bool: boolean) => {
+    setIsPlaying(() => bool)
     play(bool)
   }
 

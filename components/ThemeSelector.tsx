@@ -1,4 +1,10 @@
-const ThemeSelector = ({ theme, handleThemeClick }) => {
+const ThemeSelector = ({
+  theme,
+  handleThemeClick
+}: {
+  theme: string
+  handleThemeClick: any
+}) => {
   return (
     <div onClick={handleThemeClick} className="theme-selector">
       {theme === 'light' ? (
